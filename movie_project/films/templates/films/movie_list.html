@@ -1,0 +1,36 @@
+{% extends 'films/base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h2 class="text-center mb-4">Рецензии на фильмы</h2>
+    </div>
+</div>
+
+<div class="row">
+    {% for movie in movies %}
+    <div class="col-md-6">
+        <div class="card movie-card">
+            <div class="card-header bg-dark text-white">
+                <h3>{{ movie.title }}</h3>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Описание:</h5>
+                <p class="card-text">{{ movie.description }}</p>
+                <h5 class="card-title">Обзор:</h5>
+                <p class="card-text">{{ movie.review }}</p>
+            </div>
+            <div class="card-footer text-muted">
+                Добавлено на {{ movie.created_at|date:"F j, Y" }}
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="col-12">
+        <div class="alert alert-info">
+           Пока ни одного просмотренного фильма. <a href="{% url 'add_movie' %}" class="alert-link">Сначала добавьте!</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
